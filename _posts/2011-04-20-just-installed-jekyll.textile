@@ -7,4 +7,4 @@ title: Jekyll
 
 h1. {{ page.title }}
 
-I've finally decided to ditch Wordpress for Jekyll. For those that are unfortunate enough to be working on a Windows machine, here's a great guide for getting Pygments installed on windows: http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/
+I've finally decided to ditch "Wordpress":http://wordpress.org/ for "Jekyll":http://jekyllrb.com/. Here's a "great guide":http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/ for getting Pygments installed on Windows.
