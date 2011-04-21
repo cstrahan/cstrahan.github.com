@@ -1,0 +1,8 @@
+---
+layout: post
+title: Jekyll
+---
+
+h1. {{ page.title }}
+
+I've finally decided to ditch Wordpress for Jekyll. For those that are unfortunate enought to be working on a Windows machine, here's a great guide for getting Pygments installed on windows: http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/
