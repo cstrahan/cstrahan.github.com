@@ -154,6 +154,37 @@ ul.posts {
 
   /* standard */
 
+  #post h2 {
+	margin: auto;
+	padding: 0;
+	font: normal 18px/20px 'Consolas', 'Bitstream Vera Sans Mono', Monaco, Courier, monospace;
+	color: #A00;
+  }
+
+  #post h2 a {
+    color: #A00;	
+  }
+
+  #post h3 {
+    font: normal 16px/20px 'Consolas', 'Bitstream Vera Sans Mono', Monaco, Courier, monospace;
+    color: #A00;
+    margin: 0;
+    padding: 0;
+  }
+
+  #post h4 {
+    font: normal 14px/20px 'Consolas', 'Bitstream Vera Sans Mono', Monaco, Courier, monospace;
+    color: #E35959;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* special case: if there's no paragraph text between a header and subheader,
+     then pad between them. */
+  #post h3 + #post h4 {
+    margin-top: 20px;
+  }
+  
   #post pre {
     border: 1px solid #ddd;
     background-color: #eef;

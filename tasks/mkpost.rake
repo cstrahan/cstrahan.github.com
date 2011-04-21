@@ -15,7 +15,7 @@ date: #{long_date}
 title: 
 ---
 
-h1. {{ page.title }}
+h2. {{ page.title }}
 
   eopost
 
