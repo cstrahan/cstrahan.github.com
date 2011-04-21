@@ -6,7 +6,7 @@ comments: true
 {{ content }}
 </div>
 
-{% if page.comments %}
+{% if page.comments and page.uuid %}
 
 <div id="disqus_thread"></div>
 <script type="text/javascript">
