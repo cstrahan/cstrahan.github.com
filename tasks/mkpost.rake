@@ -15,6 +15,8 @@ date: #{long_date}
 title: 
 ---
 
+h1. {{ page.title }}
+
   eopost
 
   end
