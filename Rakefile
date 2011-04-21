@@ -1,21 +1,9 @@
-require 'uuid'
+PROJECT_ROOT = File.expand_path(File.dirname(__FILE__))
+TASKS_DIR = File.join(PROJECT_ROOT, "tasks")
+TASKS = Dir.glob(File.join(PROJECT_ROOT, "tasks", "*.rake"))
 
-desc "Makes a new post"
-task :mkpost do
-  uuid = UUID.new.generate(:compact)
-  short_date = Time.now.strftime("%Y-%m-%d")
-  long_date = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+$:.unshift(TASKS_DIR) unless $:.include?(TASKS_DIR)
 
-  File.open("_posts/#{short_date}-name.textile", "w") do |f|
-    f << <<-eopost
----
-layout: post
-uuid: #{uuid}
-date: #{long_date}
-title: 
----
-
-  eopost
-
-  end
+TASKS.each do |task|
+  load task
 end
