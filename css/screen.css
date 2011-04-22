@@ -219,6 +219,11 @@ ul.posts {
     background-color: #333;
   }
 
+  #post p.footnote {
+    color: #666;
+    font-size: 85%;
+  }
+
 #related {
   margin-top: 2em;
 }
