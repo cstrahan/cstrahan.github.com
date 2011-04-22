@@ -2,9 +2,27 @@
 layout: post
 uuid: 8ec4b3304e1a012e850c001fe16c6eb2
 date: 2010-04-21 22:00:00
-title: Jekyll
+title: From Wordpress to Jekyll
 ---
 
-h1. {{ page.title }}
+h2. {{ page.title }}
 
-I've finally decided to ditch "Wordpress":http://wordpress.org/ for "Jekyll":http://jekyllrb.com/. Here's a "great guide":http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/ for getting Pygments installed on Windows.
+I've finally decided to ditch "Wordpress":http://wordpress.org/ for "Jekyll":http://jekyllrb.com/. I _really_ don't see the point in using a full-fledged blogging platform if you're seasoned developer -- there's just _way_ too much bloat to sift through.
+
+h3. How is this any better?
+
+What do I like about it? Well, it's pretty easy to get started (aside from seting up "Pygments":http://pygments.org/ on Windows)[1], and all of my posts are contained in "textile formatted":http://redcloth.org/textile files -- for example, this "here":https://github.com/cstrahan/cstrahan.github.com/raw/master/_posts/2011-04-20-just-installed-jekyll.textile is the textile file for this very page. Of course, all of my posts are version controlled using "Git":http://git-scm.com/, and my site is "built and hosted on GitHub":http://pages.github.com/#using_jekyll_for_complex_layouts.
+
+h3. Dude, I'm sold!
+
+Sweet! Here are some tips for you "after you've installed Jekyll":https://github.com/mojombo/jekyll/wiki.
+
+h4. Configure Atom Feed
+
+...
+
+<pre class="terminal">
+$ gem install jekyll
+</pre>
+
+fn1. You'll find a guide "here":http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/ for getting Pygments installed on Windows.
