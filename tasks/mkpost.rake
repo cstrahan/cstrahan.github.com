@@ -12,6 +12,7 @@ task :mkpost do
 layout: post
 uuid: #{uuid}
 date: #{long_date}
+comments: true
 title: 
 ---
 
