@@ -1,3 +1,3 @@
 markdown: rdiscount
 pygments: true
-exclude: Rakefile, tasks
+exclude: Rakefile, tasks, _drafts
