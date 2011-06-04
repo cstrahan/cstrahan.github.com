@@ -42,6 +42,19 @@ autocmd FileType cs setlocal expandtab shiftwidth=4 softtabstop=4
 
 If you don't already own a copy, go buy "PragmataPro":http://www.fsd.it/fonts/pragmatapro.htm - thine eyes shalt thank thee.
 
+h2. Visual Studio
+
+Add gVim as an external tool. Go to <code>Tools > External Tools > Add</code> and plug in the following:
+
+<pre class="console">
+Title: &Vim
+Command: C:\Program Files (x86)\Vim\vim73\gvim.exe
+Arguments: --servername VimualStudio --remote-silent +"call cursor($(CurLine),$(CurCol))" $(ItemPath)
+Initial directory: $(SolutionDir)
+</pre>
+
+By specifying <code>--servername VimualStudio</code>, you'll have a dedicated vim process just for Visual Studio.
+
 h2. Fixing Problems
 
 Here are some problems I came across. If you have any of the following problems, see if the given solution will work for you.
