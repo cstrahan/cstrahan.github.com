@@ -19,3 +19,9 @@ p code {
   padding: 0px 0.2em;
   border: 1px solid #DEDEDE;
 }
+
+div.highlight {
+  overflow: auto;
+  overflow-y: hidden;
+  -ms-overflow-y: hidden;
+}

@@ -1,0 +1,288 @@
+---
+layout: post
+uuid: 566ff8f0707a012e851b001fe16c6eb2
+date: 2010-01-24 20:46:06
+comments: true
+title: Why Combinators? (pun intended)
+---
+
+h2. Y indeed!
+
+*"What is a fixed-point? What is the fixed-point Y combinator? How can we utterly abuse the aforementioned concepts for fun and profit?"*
+
+If you're interested in delving into such Functional Programming topics, this blog post is for you. I would like to note, however, that ML programmers can skip this entire post and read That About Wraps it Up by Bruce J. McAdam, which serves as the inspiration for much of this post; if you're a C# person, such as myself, you're in the right place.
+
+*Note:* You'll find the related code on GitHub "here":https://github.com/cstrahan/cstrahan-lib-sharp/tree/master/src/CStrahan/Combinators.
+
+h2. What's in it for me?
+
+Functional Programming is a bit mind bending for the uninitiated, so before we commit to anything, let's take a look at what we will gain by delving into this esoterrorism.
+
+h2. The -rent- complexity is too... damned... high!
+
+Let's take a look at a (naïve) implementation of a Fibonacci number generator:
+
+<code>
+Func<int, int> fib = null; fib = n => n < n ? n : fib(n-2) + fib(n-1);
+</code>
+
+While that works, it has some rather fundamental flaws:
+
+* fib closes over itself, which can lead to some very strange issues.
+* It's slower than snot.
+
+The first problem becomes apparent when do something like the following:
+
+{% highlight csharp %}
+Func<int,int> fib = null;  
+fib = n => n < 2 ? n : fib(n-2) + fib(n-1);  
+  
+Console.WriteLine(fib(6)); // displays 8  
+  
+var fibCopy = fib;  
+fib = n => n * 2;  
+  
+Console.WriteLine(fibCopy(6)); // displays 18! 
+{% endhighlight %}
+
+The problem that we're seeing here is that fib is not really recursive, as it does not inherently invoke itself – it just invokes whatever function is bound to the variable fib.
+The second problem is a little more pronounced. Go ahead and invoke fib(2000)...
+
+... assuming you' haven't died of old age, let's consider some solutions. If we could wrap the recursive definition of fib such that the result of each computation was cached, we would have a much more efficient Fibonacci number generator without having to change our original definition (a technique called Memoization). Ideally, we should be able to do something as simple as follows (excepting some funky syntax):
+
+{% highlight csharp %}
+var fib = Lambda.Functional<BigInteger, BigInteger>(fibo => n => n < 2 ? n : fibo(n - 1) + fibo(n - 2))  
+                .Memoize()  
+                .Fix();  
+  
+Console.WriteLine(fib(2000));  
+/* displays: 
+42246963333923048787067256023414827825798528402506810980102801373143085843701307 
+07224123599639141511088446087538909603607640194711643596029271983312598737326253 
+55580260699158591522949245390499872225679531698287448247299226390183371677806060 
+70116154978867198798583114688708762645973690867228840236544222952433479644801395 
+15349562972087652656069529806499841977448720155612802665404554171717881930324025 
+204312082516817125 */  
+{% endhighlight %}
+
+Guess what? By the time you've finished reading this, we will have implemented that very same code. If your interest is piqued, you'll probably enjoy the rest of this post; otherwise, this just might bore you to death.
+
+h2. Fixed-point whatsits
+
+Fixed-point combinators are at the heart of the magic that we're going to perform. But before I scare you away with my academic vocabulary, let's break this down into several bite sized, tasty concepts. First, a definition of fixed point is in order. A fixed point of a function f is a value x such that f(x) = x. In graphical terms, this is any point where y=x. While this isn't horribly interesting to us when f is a function of simple types (integers and such), it is much more exciting when we consider higher order functions.
+
+To find the fixed point of a higher order function, we need something called a fixed-point combinator. A combinator is a function with no free variables, and a fixed-point combinator is a function g such that g(f)=p, where p is the fixed point. As it turns out, this is well charted territory; perhaps the most well known fixed-point combinator, Haskell Curry's Y combinator, is defined as follows:
+
+<code>
+Y = λf.(λx.f (x x)) (λx.f (x x))
+</code>
+
+While Y works well in the untyped lambda calculus, we'll run into some problems if we try to make a straight port to C#; C# is evaluated in applicative order, and thus Y would result in infinite series of invocations. Also, we'd have to define some clever self-applicable delegate types to make the compiler happy. We'll look at two implementations – one that stays fairly true to the Y combinator, and another much simple example that cheats by using C#'s syntactic support for recursion.
+
+h2. Let's Fix it
+
+First, how can we define a recursive function without explicitly referring to itself? Well, we could require that the function be passed in like so, yielding the function that we want:
+
+<code>
+Func<Func<int, int>, Func<int, int>> fib = fibo => n => n < 2 ? n : fibo(n-2) + fibo(n-1);
+</code>
+
+... but what exactly are we supposed to pass in?
+
+We need the fixed-point – where the same function going in is the same function coming out. Because the resulting function <code>(n => n < 2 ? n : fibo(n-2) + fibo(n-1))</code> references the function coming in (fibo), the fixed-point would be the recursive function we are after.
+
+Here's the easy way out:
+
+{% highlight csharp %}
+public static Func<T1, TReturn> Fix<T1, TReturn>(Func<Func<T1, TReturn>, Func<T1, TReturn>> functional) {  
+    return functional(a1 => Fix(functional)(a1));  
+}  
+  
+var fib = Fix<int, int>(fibo => n => n < 2 ? n : fibo(n-2) + fibo(n-1));  
+Console.WriteLine(fib(6)); // displays 8  
+{% endhighlight %}
+
+Note that we are recursing by calling Fix within the lambda; while that works, that isn't quite true to the original Y Combinator. Let's take a look at the Y Combinator again:
+
+<code>
+Y = λf.(λx.f (x x)) (λx.f (x x))
+</code>
+
+And here's a C# rendition:
+
+{% highlight csharp %}
+public delegate TResult SelfApplicable<TResult>(SelfApplicable<TResult> r);  
+  
+public static Func<T1, TReturn> Fix<T1, TReturn>(Func<Func<T1, TReturn>, Func<T1, TReturn>> functional) {  
+    return new SelfApplicable<Func<T1, TReturn>>(  
+        r => a => functional(r(r))(a))(r => a => functional(r(r))(a));  
+}  
+  
+// ... we can make that a little more concise using the U combinator, which applies a given function to itself:  
+  
+public static TResult U<TResult>(SelfApplicable<TResult> r) {  
+    return r(r);  
+}  
+  
+public static Func<T1, TReturn> Fix<T1, TReturn>(Func<Func<T1, TReturn>, Func<T1, TReturn>> functional) {  
+    return U<Func<T1, TReturn>>(r => arg1 => functional(U(r))(arg1));  
+}
+{% endhighlight %}
+
+h2. Time to wrap it up
+
+Now that we have a fixed-point combinator, we can pull off some interesting tricks by wrapping the original function using some reusable combinators. I promised that I'd show you how to write a memoizing combinator, so lets take a look at that now:
+
+
+{% highlight csharp %}
+public static Func<Func<T1, TReturn>, Func<T1, TReturn>> Memoize<T1, TReturn>(Func<Func<T1, TReturn>, Func<T1, TReturn>> functional) {  
+    var cache = new Dictionary<T1, TReturn>();  
+    Func<Func<T1, TReturn>, Func<T1, TReturn>> wrapper =  
+        f => arg1 =>  
+        {  
+            TReturn result;  
+            if (!cache.TryGetValue(arg1, out result))  
+            {  
+                result = cache[arg1] = functional(f)(arg1);  
+            }  
+  
+            return result;  
+        };  
+    return wrapper;  
+}  
+  
+Func<int, int> fib =  
+    Fix(  
+        Memoize<int, int>(  
+            fibo => n => n < 2 ? n : fibo(n-2) + fibo(n-1)));  
+{% endhighlight %}
+
+That's pretty cool… but why stop there? Let's write a tracing wrapper and compare the memoized fib function against the unadulterated version:
+
+{% highlight csharp %}
+// Utility method, to allow for type inference.  
+public static Func<func<T1, TReturn>, Func<T1, TReturn>> Functional<T1, TReturn>(Func<Func<T1, TReturn>, Func<T1, TReturn>> functional) {  
+    return functional;  
+}  
+  
+public static Func<Func<T1, TReturn>, Func<T1, TReturn>> Trace<T1, TReturn>(this Func<Func<T1, TReturn>, Func<T1, TReturn>> functional) {  
+    var recursionLevel = 0;  
+    Func<Func, <T1, TReturn>, Func<T1, TReturn>> wrapper =  
+        f => arg1 =>  
+                    {  
+                        recursionLevel++;  
+  
+                        var indent = new string(' ', recursionLevel*2);  
+                        Console.WriteLine(indent + arg1);  
+  
+                        TReturn result = functional(f)(arg1);  
+  
+                        recursionLevel--;  
+  
+                        return result;  
+                    };  
+    return wrapper;  
+}  
+  
+var fastFib = Functional<int, int>(fibo => n => n < 2 ? n : fibo(n-2) + fibo(n-1))  
+             .Trace()  
+             .Memoize()  
+             .Fix();  
+  
+Console.WriteLine("fib({0}) = {1}", 8, fastFib(8));  
+  
+/* OUTPUT: 
+  8 
+    7 
+      6 
+        5 
+          4 
+            3 
+              2 
+                1 
+                0 
+fib(8) = 21 
+*/  
+  
+// (Notice that we're not memoizing here)  
+var slowFib = Functional<int, int>(fibo => n => n < 2 ? n : fibo(n-2) + fibo(n-1))  
+             .Trace()  
+             .Fix();  
+  
+Console.WriteLine("fib({0}) = {1}", 8, slowFib(8));  
+  
+/* OUTPUT: 
+  8 
+    7 
+      6 
+        5 
+          4 
+            3 
+              2 
+                1 
+                0 
+              1 
+            2 
+              1 
+              0 
+          3 
+            2 
+              1 
+              0 
+            1 
+        4 
+          3 
+            2 
+              1 
+              0 
+            1 
+          2 
+            1 
+            0 
+      5 
+        4 
+          3 
+            2 
+              1 
+              0 
+            1 
+          2 
+            1 
+            0 
+        3 
+          2 
+            1 
+            0 
+          1 
+    6 
+      5 
+        4 
+          3 
+            2 
+              1 
+              0 
+            1 
+          2 
+            1 
+            0 
+        3 
+          2 
+            1 
+            0 
+          1 
+      4 
+        3 
+          2 
+            1 
+            0 
+          1 
+        2 
+          1 
+          0 
+fib(8) = 21 
+*/  
+{% endhighlight %}
+
+h2. Functional… or <em>dys</em>functional?
+
+How practical is any of this? Well, I'm not really sure. The fact that you can "hook into" a recursive algorithm using some simple, reusable combinators is rather fascinating. On the other hand, I'd be a little worried using this in production; the lack of tail-call optimization combined with each wrapper invocation will result in a StackOverflowException in a hurry. With that said, I do believe that this exercise has given me new insights into FP and programming patterns in general, so I'd consider it a win.

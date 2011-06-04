@@ -10,4 +10,4 @@ title: Alt.Net Seattle 2011
 
 This year's "Alt.Net Seattle":http://altnet2011.heroku.com/ conference was a blast. I met and mingled with so many bright developers over the short span of four days. The collective passion and energy was absolutely overwhelming.
 
-Oh, and thank you "GitHub":http://github.com & "Bookr":https://www.bookr.net/ for the drink-up - you guys rock!
+Oh, and thank you "GitHub":http://github.com & "Bookr":https://www.bookr.net/ for the "drink-up":https://github.com/blog/850-seattle-redmond-drinkup-on-sat-may-7 - you guys rock!
