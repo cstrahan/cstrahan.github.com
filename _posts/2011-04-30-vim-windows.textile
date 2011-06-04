@@ -54,7 +54,6 @@ NoMethodError: undefined method `command' for CommandT::VIM:Module
 </pre>
 
 *Solution:* See "this page":https://wincent.com/issues/1752 for help.
-https://wincent.com/forums/command-t/topics/427
 
 h3. #2 - CommandT Crashes Vim
 
