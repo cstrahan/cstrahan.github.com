@@ -1,15 +1,30 @@
 ---
 layout: default
 ---
-<div id="post">
-{{ content }}
+<header class='ten columns offset-by-four'>
+  <h1>{{ page.title }}</h1>
+</header>
+
+<div class='five columns offset-by-four gray'>
+  {{ page.date | date_to_string }}
 </div>
+
+<div class='five columns' id='tweet'>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-text="{{ page.title }}" data-count="horizontal" data-via="charlesstrahan">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+</div>
+
+<article class='ten columns offset-by-four'> 
+{{ content }}
+</article>
 
 {% if page.comments and page.uuid %}
 
-<div id="disqus_thread"></div>
+<div class='ten columns offset-by-four'>
+  <div id="disqus_thread"></div>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
 <script type="text/javascript">
-    
     var disqus_shortname = 'cstrahan'; // required: replace example with your forum shortname
     var disqus_identifier = '{{ page.uuid }}';
     // var disqus_url = 'http://example.com/permalink-to-page.html';
@@ -20,16 +35,6 @@ layout: default
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 {% endif %}
 
-<div id="related">
-  <h2>Related Posts</h2>
-  <ul class="posts">
-    {% for post in site.related_posts limit:3 %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>

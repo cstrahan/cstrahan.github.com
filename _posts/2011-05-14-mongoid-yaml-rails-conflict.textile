@@ -1,0 +1,37 @@
+---
+layout: post
+uuid: efd3392160b3012e8519001fe16c6eb2
+date: 2011-05-14 18:58:06
+comments: true
+title: Mongoid + YAML + Rails = Conflict
+---
+
+h2. The Problem
+
+You get the following when you try to run your Rails app with Mongoid:
+
+<pre class="console">
+db_name must be a string or symbol
+C:/Ruby192/lib/ruby/gems/1.9.1/gems/mongo-1.3.1/lib/mongo/util/support.rb:50:in `validate_db_name'
+</pre>
+
+h2. The Cause
+
+You probably have RubyGems v1.5.0, which changes the default yaml parser to "psych":https://github.com/tenderlove/psych (as opposed to "syck":http://rubyforge.org/projects/syck/), which doesn't like <code>:<<</code> in yaml files.
+
+h2. The Solution
+
+Add the following to the top of your config/environment.rb:
+
+{% highlight ruby %}
+require 'yaml' 
+YAML::ENGINE.yamler= 'syck'
+{% endhighlight %}
+
+... or perhaps you could just tweak your YAML to make psych happy. I don't know what-the-hell I'm doing, so I took the easy way out.
+
+Feel free to share better alternatives.
+
+h2. Credit
+
+Thanks go to the chaps on "this Mongoid forum thread":http://groups.google.com/group/mongoid/browse_thread/thread/9213a17a73d3c422/911f0811bf5b9d79.

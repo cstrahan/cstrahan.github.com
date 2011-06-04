@@ -2,22 +2,11 @@
 layout: default
 title: Charles Strahan
 ---
-
-<div id="home">
-  <h1>Blog Posts</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-
-  <h1>Interviews, Talks, Etc</h1>
-  <ul class="posts">
-    <li><span>N/A</span> &raquo; Coming soon!</li>
-  </ul>
-
-  <h1>Prominent Open Source Projects</h1>
-  <ul class="posts">
-    <li><a href="https://github.com/cstrahan/iron-ffi/">IronRuby FFI:</a> IronRuby's FFI implementation.</li>
-  </ul>
-</div>
+<ul id="posts">
+  {% for post in site.posts %}
+    <li>
+      <a class="nine columns offset-by-four" href="{{ post.url }}">{{ post.title }}</a>
+      <span class="three columns">{{ post.date | date_to_string }}</span>
+    </li>
+  {% endfor %}
+</ul>

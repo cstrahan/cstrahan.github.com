@@ -16,8 +16,6 @@ comments: true
 title: 
 ---
 
-h2. {{ page.title }}
-
   eopost
 
   end

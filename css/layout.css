@@ -1,0 +1,154 @@
+/* 
+* Skeleton V1.0.1
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 5/19/2011
+*/
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+	
+/* #Site Styles
+================================================== */
+
+body {
+  margin: 20px;
+  font-family: Georgia, serif;
+  font-size: 12pt;
+}
+
+h1 { font-size: 46px; }
+
+.four.columns h1 {
+  margin-bottom: 10px;
+}
+
+#posts {
+  padding-top: 15px;
+}
+
+#posts span {
+  color: #999;
+}
+
+a {
+  color: #06A;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #06A;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+a:visited { color: #607890; }
+
+.sidebar {
+  width: 220px; 
+}
+
+.sidebar > section {
+  position: fixed;
+  width: inherit;
+}
+
+.hidden { display: none; }
+
+#mobile { 
+  margin-top: 24px;
+}
+
+.highlight {
+  /* background: #F7F7F7; */
+  /* border: 2px solid #EEE; */
+  /* color: #000; */
+  /* display: block; */
+  /* line-height: 150%; */
+  /* margin: 24px 0 24px 0; */
+  /* padding: 10px; */
+  margin-bottom: 20px;
+}
+
+pre {
+  margin-bottom: 20px;
+}
+
+code {
+  font-size: 90%;
+  font-family: Monaco, Consolas, monospace;
+}
+
+article li {
+  margin-left: 30px;
+	list-style: disc outside;
+}
+
+article li li {
+	list-style: circle outside;
+}
+
+article li li li {
+	list-style: square outside;
+}
+
+#tweet {
+  text-align: right;
+  margin-bottom:20px;
+}
+
+/* #Page Styles
+================================================== */
+
+/* #Media Queries
+================================================== */
+	
+	/* iPad Portrait/Browser */
+	@media only screen and (min-width: 768px) and (max-width: 991px) {}
+	
+	/* Mobile/Browser */
+	@media only screen and (max-width: 767px) {
+    .sidebar { display: none; } 
+    #mobile { display: inline; } 
+  }
+	
+	/* Mobile Landscape/Browser */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {}
+	
+	/* Anything smaller than standard 960 */
+	@media only screen and (max-width: 959px) {}
+	
+	/* iPad Portrait Only */
+	@media only screen and (min-width: 768px) and (max-width: 991px) and (max-device-width: 1000px) {}
+	
+	/* Mobile Only */
+	@media only screen and (max-width: 767px) and (max-device-width: 1000px) { 
+  }
+	
+	/* Mobile Landscape Only */
+	@media only screen and (min-width: 480px) and (max-width: 767px) and (max-device-width: 1000px) {}
+	
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file 
+		Just create a "fonts" folder at the root, 
+		copy your FontName into code below and remove
+		comment brackets */
+		
+/*	@font-face {
+	    font-family: 'FontName';
+	    src: url('../fonts/FontName.eot');
+	    src: url('../fonts/FontName.eot?iefix') format('eot'),
+	         url('../fonts/FontName.woff') format('woff'),
+	         url('../fonts/FontName.ttf') format('truetype'),
+	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+	    font-weight: normal;
+	    font-style: normal; }
+*/

@@ -1,0 +1,13 @@
+---
+layout: post
+uuid: 31d8c5315c02012e8516001fe16c6eb2
+date: 2011-05-08 17:35:42
+comments: true
+title: Alt.Net Seattle 2011
+---
+
+!/images/2011-05-05-altnetseattle-pano-1.jpg!
+
+This year's "Alt.Net Seattle":http://altnet2011.heroku.com/ conference was a blast. I met and mingled with so many bright developers over the short span of four days. The collective passion and energy was absolutely overwhelming.
+
+Oh, and thank you "GitHub":http://github.com & "Bookr":https://www.bookr.net/ for the drink-up - you guys rock!
