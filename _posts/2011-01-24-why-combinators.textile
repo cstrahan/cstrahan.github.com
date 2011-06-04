@@ -10,7 +10,7 @@ h2. Y indeed!
 
 *"What is a fixed-point? What is the fixed-point Y combinator? How can we utterly abuse the aforementioned concepts for fun and profit?"*
 
-If you're interested in delving into such Functional Programming topics, this blog post is for you. I would like to note, however, that ML programmers can skip this entire post and read That About Wraps it Up by Bruce J. McAdam, which serves as the inspiration for much of this post; if you're a C# person, such as myself, you're in the right place.
+If you're interested in delving into such Functional Programming topics, this blog post is for you. I would like to note, however, that ML programmers can skip this entire post and read "That About Wraps it Up":http://www.lfcs.inf.ed.ac.uk/reports/97/ECS-LFCS-97-375/ by Bruce J. McAdam, which serves as the inspiration for much of this post; if you're a C# person, such as myself, you're in the right place.
 
 *Note:* You'll find the related code on GitHub "here":https://github.com/cstrahan/cstrahan-lib-sharp/tree/master/src/CStrahan/Combinators.
 
