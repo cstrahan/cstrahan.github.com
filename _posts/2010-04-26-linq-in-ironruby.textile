@@ -10,7 +10,7 @@ Perusing through some old IronRuby mailing lists, I saw some people inquiring ab
 
 That's way to much suckage going on - now lets make it blow! Er, suck less:
 
-{% highlight csharp %}
+{% highlight ruby %}
 require 'System.Core, Version=3.5.0.0, Culture=Neutral, PublicKeyToken=b77a5c561934e089'  
 require 'System.Linq.Dynamic'  
   
