@@ -34,3 +34,5 @@ h3. Use Disqus
 Use "Disqus":http://disqus.com/ for your comments and be sure to use your posts' <code>uuid</code>, just in case your URLs change (the UUID will assosciate your posts with your comments). You can check out my post template "here":https://github.com/cstrahan/cstrahan.github.com/blob/master/_layouts/post.html.
 
 fn1. You'll find a guide "here":http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/ for getting Pygments installed on Windows.
+
+fn2. BTW, <code>Jekyll 0.11.0</code> has "some trouble with syntax highlighting on Windows":https://github.com/rtomayko/posix-spawn/issues/17.
