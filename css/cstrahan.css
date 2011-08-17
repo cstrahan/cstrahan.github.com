@@ -10,6 +10,8 @@ pre.console {
   white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
   word-wrap: break-word; /* Internet Explorer 5.5+ */ 
   border: 1px solid #DEDEDE;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 p code {
@@ -24,4 +26,6 @@ div.highlight {
   overflow: auto;
   overflow-y: hidden;
   -ms-overflow-y: hidden;
+  padding: 10px;
+  border-radius: 10px;
 }
