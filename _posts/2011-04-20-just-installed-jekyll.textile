@@ -35,4 +35,4 @@ Use "Disqus":http://disqus.com/ for your comments and be sure to use your posts'
 
 fn1. You'll find a guide "here":http://skim.la/2010/02/14/how-to-run-jekyll-pygmentize-on-windows/ for getting Pygments installed on Windows.
 
-fn2. BTW, <code>Jekyll 0.11.0</code> has "some trouble with syntax highlighting on Windows":https://github.com/rtomayko/posix-spawn/issues/17.
+fn2. BTW, <code>Jekyll 0.11.0</code> has "some trouble with textile on Windows":https://github.com/rtomayko/posix-spawn/issues/17.
