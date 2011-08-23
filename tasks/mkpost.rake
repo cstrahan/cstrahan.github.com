@@ -6,8 +6,10 @@ task :mkpost do
   short_date = Time.now.strftime("%Y-%m-%d")
   long_date = Time.now.strftime("%Y-%m-%d %H:%M:%S")
 
-  File.open("_posts/#{short_date}-name.textile", "w") do |f|
-    f << <<-eopost
+  file_name = "_posts/#{short_date}-name.textile"
+  puts "Generated #{file_name}"
+  File.open(file_name, "w") do |f|
+    f << <<-EOF
 ---
 layout: post
 uuid: #{uuid}
@@ -16,7 +18,7 @@ comments: true
 title: 
 ---
 
-  eopost
+  EOF
 
   end
 end
