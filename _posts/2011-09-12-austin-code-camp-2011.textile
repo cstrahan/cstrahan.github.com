@@ -1,0 +1,17 @@
+---
+layout: post
+uuid: 0ca7bb00bfed012e53d0001bfc9c480a
+date: 2011-09-12 23:16:16
+comments: true
+title: Austin Code Camp 2011
+---
+
+It was a pleasure to both attend and speak at "Austin Code Camp":http://adnug.github.com/code-camp-2011/ this year. I couldn't _possibly_ have had a better response to my first talk, *"Seven Soft Skills for Super Sexy Salaries"*! If you attended my first talk, thank you so much for all of the positive feedback, and all of the great questions!
+
+h2. Whoops!
+
+Unfortunately, I experienced some technical difficulties whilst giving my second talk, *"Let's create a programming language!"*. Because of that, I will be recording and uploading the presentation over the next couple days.
+
+For the curious, ANTLRWorks was invoking <code>javac</code>, which in turn failed with <code>javac: file not found: <path-to-file></code>. Of course, the file that <code>javac</code> was complaining about was generated _by_ ANTLRWorks and _was_ there, in plain sight. Something was utterly confused. I rebooted and, like magic, ANTLRWorks was working fine...
+
+*Note to self:* when preparing a presentation, use the same computer you plan to bring with you - crazy shit happens!
