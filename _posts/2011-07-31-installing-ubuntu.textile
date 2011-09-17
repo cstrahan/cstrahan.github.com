@@ -171,6 +171,17 @@ h2. Erlang
 
 See "this gist/script":https://gist.github.com/991706.
 
+h2. MongoDB
+
+<pre class="console">
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+$ sudo nano /etc/apt/sources.list
+$ echo "deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen" | sudo tee --append /etc/apt/sources.list
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install mongodb-10gen
+</pre>
+
 h2. Programming Environments
 
 I installed Eclipse, Netbeans and Emacs from the Software Center. Vim and IntelliJ IDEA were a little more involved, though.
