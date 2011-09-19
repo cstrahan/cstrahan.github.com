@@ -1,0 +1,22 @@
+---
+layout: post
+uuid: 75fdf3b0c4d0012e53d1001bfc9c480a
+date: 2011-09-19 04:34:14
+comments: true
+title: No Sound from Headphones on Ubuntu
+---
+
+On my Compaq Presario (Model: SR5152NX, Soundcard: ALC888), the headphone jack wasn't working. I tried screwing around with <code>/etc/modprobe.d/alsa-base.conf</code> by adding <code>options snd-hda-intel model=MODEL</code> (where <code>MODEL</code> was one of _many_ models I tried)... and I managed to get audio coming out of _both_ jacks at one point, which still wasn't right.
+
+Finally, I reverted all of my changes and tried this out:
+
+<pre class="console">
+# Let's get the latest ALSA drivers:
+sudo add-apt-repository ppa:ubuntu-audio-dev/ppa
+sudo apt-get update
+sudo apt-get install linux-alsa-driver-modules-$(uname -r)
+
+# Reboot :)
+</pre>
+
+Et voilã , audio works flawlessly now.
