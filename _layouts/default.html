@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	<!-- Force Latest IE rendering engine -->
-	<title>{{ page.title }}</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">	<!-- Force Latest IE rendering engine -->
+  <title>{{ page.title }}</title>
 
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+  <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
 
-	 <script
-	   type="text/javascript"
-     src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-   </script>
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script type="text/javascript"
+    src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
 
-   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-   <meta name="author" content="Charles Strahan" />
-   <link href="http://feeds.feedburner.com/cstrahan" rel="alternate" title="Charles Strahan" type="application/atom+xml" />
+  <meta name="author" content="Charles Strahan" />
+  <link href="http://feeds.feedburner.com/cstrahan" rel="alternate" title="Charles Strahan" type="application/atom+xml" />
 
-   <link rel="stylesheet" href="/css/skeleton.css">
-   <link rel="stylesheet" href="/css/base.css">
-   <link rel="stylesheet" href="/css/layout.css">
-   <link rel="stylesheet" href="/css/syntax/solarized.css">
-   <link rel="stylesheet" href="/css/cstrahan.css">
+  <link rel="stylesheet" href="/css/skeleton.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/syntax/solarized.css">
+  <link rel="stylesheet" href="/css/cstrahan.css">
 </head>
 <body>
 <div class="container">
@@ -53,6 +53,16 @@
 
   {{ content }}
 
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.4.min.js"><\/script>')</script>
+
+  <script>
+    window._gaq = [['_setAccount','UA-26948636-1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
 </div>
 
 
