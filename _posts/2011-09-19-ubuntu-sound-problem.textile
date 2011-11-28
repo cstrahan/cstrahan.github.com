@@ -6,17 +6,40 @@ comments: true
 title: No Sound from Headphones on Ubuntu
 ---
 
-On my Compaq Presario (Model: SR5152NX, Soundcard: ALC888), the headphone jack wasn't working. I tried screwing around with <code>/etc/modprobe.d/alsa-base.conf</code> by adding <code>options snd-hda-intel model=MODEL</code> (where <code>MODEL</code> was one of _many_ models I tried)... and I managed to get audio coming out of _both_ jacks at one point, which still wasn't right.
+On my Compaq Presario (Model: SR5152NX, Soundcard: ALC888), the audio wasn't working quite right; when I plugged my headphones in, the audio came out of both the speakers and the heaphones. Here's how I fixed it.
 
-Finally, I reverted all of my changes and tried this out:
+h2. Finding the Sound Card Model
+
+Issue the following command in a terminal:
 
 <pre class="console">
-# Let's get the latest ALSA drivers:
-sudo add-apt-repository ppa:ubuntu-audio-dev/ppa
-sudo apt-get update
-sudo apt-get install linux-alsa-driver-modules-$(uname -r)
+head -n 1 /proc/asound/card0/codec*
+</pre>
 
-# Reboot :)
+On my Compaq, that prints *"Codec: Realtek ALC888"*.
+
+h2. Find the Correct Model Parameter
+
+We're going to modify <code>/etc/modprobe.d/alsa-base.conf</code> to specify the sound card model, but first we need to know what model parameter we need. Look through the documentation here to find your model:
+
+<pre class="console">
+zless /usr/share/doc/alsa-base/driver/HD-Audio-Models.txt.gz
+</pre>
+
+You'll find a number of possible settings - you'll need to pick the closest setting to your hardware. You may need to try a couple by trial and error before you get it just right.
+
+I looked under the *ALC882/883/885/888/889* section and tried *3stack-6ch*, as I have three ports in the back, and 6 channels per my hardware specs. Unfortunately, that wasn't quite right, so I tried *3stack-hp* instead, which did the trick.
+
+h2. Tweak alsa-base.conf
+
+We must now teak <code>alsa-base.conf</code>:
+
+<pre class="console">
+# Edit the config file:
+sudo vim /etc/modprobe.d/alsa-base.conf
+
+# Add the following line to the bottom:
+# options snd-hda-intel model=3stack-hp
 </pre>
 
 Et voilã , audio works flawlessly now.
