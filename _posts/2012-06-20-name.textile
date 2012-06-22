@@ -1,0 +1,188 @@
+---
+layout: post
+uuid: a5ee3ec09d69012f072b68a86d3fcf60
+date: 2012-06-20 20:54:58
+comments: true
+title: Demystifying CoffeeScript's Magic Sauce
+---
+
+h2. WTF CoffeScript, you cray cray!
+
+Have you ever looked at your compiled js files and thought to yourself ""la gente esta muy loca, WTF?":http://www.youtube.com/watch?v=S431bmMVUJw" I know I have! Let's take a look at what's going on here.
+
+h2. An Introduction to Scope
+
+Let's start with <code>foo = "bar"</code>; this becomes:
+
+{% highlight javascript %}
+// JS
+(function() {
+  var foo;
+  foo = "bar";
+}).call(this);
+{% endhighlight %}
+
+WTF? What is that <code>function</code> doing in there? Well, this has to do with how JavaScript scopes variables. JavaScript has two kinds of scope: global scope and function scope. Any variable not residing within a function definition is automatically a global variable. This is obviously quite dangerous, as you might accidentally step on someone's toes with your helper functions and/or variables in your script. Fortunately, there's a pretty easy solution: wrap your code in an anonymous function and then immediately invoke it, which is precisely what CoffeeScript does for you.
+
+So, what if you really do want a global variable? That's pretty easy too. In JavaScript, all global variables are defined as properties on the global <code>window</code> object, and vice versa; therefore, all you have to do is be explicit about your intent: <code>window.foo = "bar"</code>.
+
+h2. A First Glance at Classes
+
+Let's start fleshing out a more real world example, shall we?
+
+{% highlight coffeescript %}
+# CS
+class Person
+  constructor: (@firstName, @lastName) ->
+  fullName: -> "#{@firstName} #{@lastName}"
+
+bob = new Person "Bob", "Smith"
+console.log bob.fullName()
+{% endhighlight %}
+
+{% highlight javascript %}
+// JS
+(function() {
+  Person = (function() {
+    // This is the constructor
+    function Person(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+    // This is our fullName function
+    Person.prototype.fullName = function() {
+      return "" + this.firstName + " " + this.lastName;
+    };
+    // return the constructor
+    return Person;
+  })(); // call the anonymous function
+        // the outermost Person variable will be bound to the constructor function
+
+  bob = new Person("Bob", "Smith");
+  console.log(bob.fullName());
+}).call(this);
+{% endhighlight %}
+
+There are a couple of interesting things here. Note that when we create <code>bob</code>, we are actually calling the <code>Person</code> constructor, which sets <code>firstName</code> and <code>lastName</code> on our <code>Person</code> instance.
+
+Secondly, note that we are setting <code>fullName</code> on <code>Person.prototype</code>. Unlike languages like Ruby (and a myriad of others) with class-based inheritance, JavaScript has prototypal inheritance. In a prototypal system, objects inherit from other objects. When we say <code>new Foo()</code>, JavaScript does two things:
+
+# Creates a new object that inherits from <code>Foo.prototype</code> (i.e. all properties on <code>Foo.prototype</code> will be available to our new object).
+# After our new object has been created, it calls the constructor function <code>Foo</code> with <code>this</code> bound to our new object.
+
+So, by setting <code>Person.prototype.fullName</code>, we can now successfully call <code>bob.fullName()</code>, because <code>bob</code> is an instance of <code>Person</code>.
+
+h2. Arrows of all Shapes and Sizes
+
+The difference between the fat arrow (<code>=></code>) and the skinny arrow (<code>-></code>) can be a little hard to grok if you are new to the way JavaScript works. Let's figure this out one step at a time using a relatively simple example:
+
+* Bob orders a pizza.
+* When the pizza arrives, he wants to eat it.
+
+{% highlight coffeescript %}
+# CS
+class Person
+  constructor: (@firstName, @lastName) ->
+  fullName: -> "#{@firstName} #{@lastName}"
+  eat: (food) -> console.log "#{@fullName()} ate a #{food}!"
+
+# This function prepares a pizza and will call you back when it's ready.
+orderPizza = (kind, callback) ->
+  setTimeout (-> callback "#{kind} pizza")
+           , 2000
+
+bob = new Person "Bob", "Smith"
+
+# Order a cheese pizza, and then make Bob eat it once it's ready.
+orderPizza "cheese", bob.eat
+{% endhighlight %}
+
+{% highlight javascript %}
+// JS
+(function() {
+  var Person, bob, orderPizza;
+  Person = (function() {
+    function Person(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+    Person.prototype.fullName = function() {
+      return "" + this.firstName + " " + this.lastName;
+    };
+    Person.prototype.eat = function(food) {
+      return console.log("" + (this.fullName()) + " ate a " + food + "!");
+    };
+    return Person;
+  })();
+  orderPizza = function(kind, callback) {
+    return setTimeout((function() {
+      return callback("" + kind + " pizza");
+    }), 2000);
+  };
+  bob = new Person("Bob", "Smith");
+  orderPizza("cheese", bob.eat);
+}).call(this);
+{% endhighlight %}
+
+If you run this code in your JS console, you'll find that this actually blows up after two seconds: <code>Uncaught TypeError: Object [object Window] has no method 'fullName'</code>
+
+What happened? Unfortunately, when you hand off Bob's <code>eat</code> function to <code>orderPizza</code>, it doesn't carry along <code>bob</code> as the receiver when it is invoked (i.e. <code>this</code> is _not_ <code>bob</code> when <code>eat</code> is invoked, it is in fact the global <code>window</code> object, and <code>window</code> does not have a <code>firstName</code> function!). To gain a better understanding of this behaviour, I suggest you give "this blog post by Yehuda Katz":http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/ a thorough read. Really, read it right now - I'll wait for you.
+
+If you read Yehuda's post, you'll know that we can make use of <code>Function.prototype.bind</code>, but it would be nice if we could just hand off <code>bob.eat</code> and not even have to worry about it; fortunately, with a little help from <code>=></code> you can! Let's take a look at how the fat arrow helps us out:
+
+{% highlight coffeescript %}
+# CS
+class Person
+  constructor: (@firstName, @lastName) ->
+  fullName: => "#{@firstName} #{@lastName}"
+  eat: (food) => console.log "#{@fullName()} ate a #{food}!"
+
+# This function prepares a pizza and will call you back when it's ready.
+orderPizza = (kind, callback) ->
+  setTimeout (-> callback "#{kind} pizza")
+           , 2000
+
+bob = new Person "Bob", "Smith"
+
+# Order a cheese pizza, and then make Bob eat it once it's ready.
+orderPizza "cheese", bob.eat
+{% endhighlight %}
+
+{% highlight javascript %}
+// JS
+(function() {
+  var Person, bob, orderPizza;
+  // Note this new function, __bind, that CoffeeScript uses behind the scenes further down.
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+  Person = (function() {
+    function Person(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+
+      // Note these two new lines!
+      this.eat = __bind(this.eat, this);
+      this.fullName = __bind(this.fullName, this);
+    }
+    Person.prototype.fullName = function() {
+      return "" + this.firstName + " " + this.lastName;
+    };
+    Person.prototype.eat = function(food) {
+      return console.log("" + (this.fullName()) + " ate a " + food + "!");
+    };
+    return Person;
+  })();
+  orderPizza = function(kind, callback) {
+    return setTimeout((function() {
+      return callback("" + kind + " pizza");
+    }), 2000);
+  };
+  bob = new Person("Bob", "Smith");
+  orderPizza("cheese", bob.eat);
+}).call(this);
+{% endhighlight %}
+
+Each time you use the fat arrow in a class, CoffeeScript will add a line of code to the constructor to bind the function to the new instance using <code>__bind</code> (Yehuda's blog post explains how this function works, so I won't repeat that here). If you run the code now, you should see "Bob Smith ate a cheese pizza!" in your console.
+
+h2. Fin
+
+That about wraps it up! I hope this post sheds some light on why CoffeeScript generates code the way it does. Remember that CoffeeScript merely compiles down to regular JavaScript; while the syntax is more convenient, you still need to know how JavaScript works if you want to be proficient in CoffeeScript. If you have an questions, let me know.

@@ -1,0 +1,14 @@
+Demystifying CoffeeScript's Magic Sauce
+The JavaScript Object Model
+The Ruby Object Model
+Metaprogramming - Ruby
+Metaprogramming - JavaScript
+
+Concurrency Patterns - Intro - Concurrency vs Parallelism
+Concurrency Patterns - Continuation Passing Style
+Concurrency Patterns - CPS Compilation
+Concurrency Patterns - Reactor Pattern
+Concurrency Patterns - Cooperative Multitasking (call/cc & Fibers)
+Concurrency Patterns - Using Fibers to simulate Synchronous Code
+Concurrency Patterns - Futures & Combinators
+Concurrency Patterns - Threads (and Synchronization)

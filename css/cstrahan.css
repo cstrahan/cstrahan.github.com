@@ -22,6 +22,21 @@ p code {
   border: 1px solid #DEDEDE;
 }
 
+ul code {
+  font-size: 12px;
+  background-color: ghostWhite;
+  color: #444;
+  padding: 0px 0.2em;
+  border: 1px solid #DEDEDE;
+}
+li code {
+  font-size: 12px;
+  background-color: ghostWhite;
+  color: #444;
+  padding: 0px 0.2em;
+  border: 1px solid #DEDEDE;
+}
+
 div.highlight {
   overflow: auto;
   overflow-y: hidden;
