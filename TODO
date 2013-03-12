@@ -1,8 +1,20 @@
+How RSA Works
+How SSL/TLS Works (nod to Travis-CI post)
+Implementing a Reliable Protocol Over UDP
+Web App Security (CSRF et al)
+Ruby's break Keyword
 Demystifying CoffeeScript's Magic Sauce
 The JavaScript Object Model
 The Ruby Object Model
 Metaprogramming - Ruby
 Metaprogramming - JavaScript
+Self, IO, Smalltalk, Scala, Rust, Ioke, Clojure, Ruby, Java (agents), CLJS, J, Factor, Haskell
+Amb in Ruby
+Implementing Fibers with call/cc
+Kitchen Tour - Cooking with the Chef (run through of all chef features)
+IRSSI Configuration
+Retry via call/cc
+binding_of_caller via call/cc
 
 Concurrency Patterns - Intro - Concurrency vs Parallelism
 Concurrency Patterns - Continuation Passing Style
