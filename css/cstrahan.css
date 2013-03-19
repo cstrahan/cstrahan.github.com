@@ -14,22 +14,7 @@ pre.console {
   border-radius: 10px;
 }
 
-p code {
-  font-size: 12px;
-  background-color: ghostWhite;
-  color: #444;
-  padding: 0px 0.2em;
-  border: 1px solid #DEDEDE;
-}
-
-ul code {
-  font-size: 12px;
-  background-color: ghostWhite;
-  color: #444;
-  padding: 0px 0.2em;
-  border: 1px solid #DEDEDE;
-}
-li code {
+p code, ul code {
   font-size: 12px;
   background-color: ghostWhite;
   color: #444;
@@ -38,9 +23,13 @@ li code {
 }
 
 div.highlight {
-  overflow: auto;
-  overflow-y: hidden;
-  -ms-overflow-y: hidden;
-  padding: 10px;
-  border-radius: 10px;
+  font-family: Consolas,Menlo,"Courier New",monospace;
+  font-size: 16px;
+  line-height: 22px;
+  overflow-x: auto;
+  border: 1px solid #d5d5d5;
+  border-left: 10px solid #d5d5d5;
+  background-color: #fafafa;
+  padding: 11px 10px 12px;
+  margin-left: -10px;
 }
