@@ -1,3 +1,4 @@
+Tutorial on D3 animated tree
 How RSA Works
 How SSL/TLS Works (nod to Travis-CI post)
 Implementing a Reliable Protocol Over UDP
@@ -9,12 +10,13 @@ The Ruby Object Model
 Metaprogramming - Ruby
 Metaprogramming - JavaScript
 Self, IO, Smalltalk, Scala, Rust, Ioke, Clojure, Ruby, Java (agents), CLJS, J, Factor, Haskell
+call/cc in laymen's terms
 Amb in Ruby
+Retry via call/cc
+binding_of_caller via call/cc
 Implementing Fibers with call/cc
 Kitchen Tour - Cooking with the Chef (run through of all chef features)
 IRSSI Configuration
-Retry via call/cc
-binding_of_caller via call/cc
 
 Series diving into OSS projects
 
@@ -28,3 +30,8 @@ Concurrency Patterns - Cooperative Multitasking (call/cc & Fibers)
 Concurrency Patterns - Using Fibers to simulate Synchronous Code
 Concurrency Patterns - Futures & Combinators
 Concurrency Patterns - Threads (and Synchronization)
+
+
+Design:
+http://zachholman.com/
+http://stevelosh.com/
