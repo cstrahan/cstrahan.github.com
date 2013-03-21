@@ -6,7 +6,7 @@ comments: true
 title: Demystifying CoffeeScript's Magic Sauce
 ---
 
-h2. WTF CoffeScript, you cray cray!
+h2. WTF CoffeeScript, you cray cray!
 
 Have you ever looked at your compiled js files and thought to yourself ""la gente esta muy loca, WTF?":http://www.youtube.com/watch?v=S431bmMVUJw" I know I have! Let's take a look at what's going on here.
 
