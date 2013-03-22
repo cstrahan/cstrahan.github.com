@@ -1,7 +1,7 @@
 ---
 layout: post
 uuid: a5ee3ec09d69012f072b68a86d3fcf60
-date: 2012-06-20 20:54:58
+date: 2012-07-20 20:54:58
 comments: true
 title: Demystifying CoffeeScript's Magic Sauce
 ---

@@ -18,6 +18,10 @@ def long_date(time=Time.now)
   time.strftime("%Y-%m-%d %H:%M:%S")
 end
 
+def parse_long_date(str)
+  DateTime.strptime(str, "%Y-%m-%d %H:%M:%S")
+end
+
 TASKS.each do |task|
   load task
 end
