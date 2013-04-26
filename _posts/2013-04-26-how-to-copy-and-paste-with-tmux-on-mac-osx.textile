@@ -1,0 +1,62 @@
+---
+layout: post
+uuid: a2c72b00828301308a723c07546db236
+date: 2013-04-26 10:07:56
+comments: true
+title: How to Copy and Paste with Tmux on Mac OSX
+---
+
+h2. Step 1: Install reattach-to-user-namespace
+
+If you're using Homebrew:
+
+{% highlight bash %}
+brew install reattach-to-user-namespace
+{% endhighlight %}
+
+If not, go compile "the code":https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard yourself.
+
+h2. Step 2: Configure the Deafult Shell Command
+
+Open your Tmux config file (usually <code>~/.tmux.conf</code>) and add the
+following:
+
+{% highlight bash %}
+set-option -g default-command "command -v reattach-to-user-namespace >/dev/null 2>&1 && reattach-to-user-namespace -l $SHELL || $SHELL -l"
+{% endhighlight %}
+
+Now, every time you open a new window or pane, Tmux will will attempt to use
+<code>reattach-to-user-namespace</code> before starting your shell.
+
+h2. Step 3: Configure Copy-Mode Bindings
+
+Assuming you're using the vi keybindings, add the following to your config:
+
+{% highlight bash %}
+bind -t vi-copy v begin-selection
+bind -t vi-copy c copy-selection
+bind y send-keys c\;\
+       run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+{% endhighlight %}
+
+Here's what each line does:
+
+# Just for convenience; pressing v will now begin a selection.
+# Provides a key binding that we'll use in line 3.
+# Provides a global keybinding (_prefix_-y) that invokes
+<code>copy-selection</code> and then pipes the buffer into <code>pbcopy</code>.
+Unfortunately, we have to use a global keybinding here because tmux cannot bind
+multiple commands to any key under a specific key-table, only globally.
+
+Et voila - you can now use _prefix_-y to copy text to the clipboard.
+
+If you're using emacs bindings, you might want to use something like this
+instead:
+
+{% highlight bash %}
+# unbind M-w; we'll use prefix-M-w instead
+unbind -t emacs-copy M-w
+bind -t emacs-copy c copy-selection
+bind M-w send-keys c\;\
+       run-shell "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+{% endhighlight %}
