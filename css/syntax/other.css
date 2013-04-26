@@ -1,0 +1,30 @@
+.highlight .c,.highlight .cm,.highlight .cp,.highlight .c1 {
+  color:#93a1a1!important;
+  font-style:italic!important;
+}
+
+.highlight .o,.highlight .gs {
+  color:#586e75!important;
+  font-weight:bold!important;
+}
+
+.highlight .kd,.highlight .n,.highlight .na,.highlight .vg,.highlight .vi,.highlight .nv,.highlight .si {
+  color:#268bd2!important;
+}
+
+.highlight .kt,.highlight .mf,.highlight .m,.highlight .mh,.highlight .mi,.highlight .s,.highlight .sd,.highlight .s2,.highlight .sr,.highlight .s1 {
+  color:#2aa198!important;
+}
+
+.highlight .nb,.highlight .nl {
+  color:#859900!important;
+}
+
+.highlight .no,.highlight .nn,.highlight .nx {
+  color:#b58900!important;
+}
+
+.highlight .ne,.highlight .nf,.highlight .nt {
+  color:#268bd2!important;
+  font-weight:bold!important;
+}
