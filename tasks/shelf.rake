@@ -1,3 +1,4 @@
+desc 'move uncommitted posts to drafts dir'
 task :shelve do
   committed = `git ls-tree --name-only -r HEAD`.split("\n")
   uncommitted = Dir.glob("_posts/*") - committed
@@ -7,6 +8,7 @@ task :shelve do
   end
 end
 
+desc 'move drafts to posts dir'
 task :unshelve do
   drafts = Dir.glob("drafts/*")
   drafts.each do |draft|

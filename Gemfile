@@ -7,3 +7,6 @@ gem 'rdiscount'
 gem 'posix-spawn'
 gem 'rake'
 gem 'uuid'
+
+# latest directory_watcher seems to be borked
+gem 'directory_watcher', '1.4.1'

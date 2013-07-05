@@ -10,7 +10,7 @@ GEM
       fast-stemmer (>= 1.0.0)
     colored (1.2)
     configure-s3-website (1.1.1)
-    directory_watcher (1.5.1)
+    directory_watcher (1.4.1)
     erubis (2.7.0)
     fast-stemmer (1.0.2)
     filey-diff (1.1.0)
@@ -57,6 +57,7 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth
+  directory_watcher (= 1.4.1)
   jekyll (= 0.12.1)
   jekyll-s3
   posix-spawn

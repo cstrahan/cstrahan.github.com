@@ -1,4 +1,5 @@
 # /^date: \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/
+desc 'rename all posts such that their date matches the front matter'
 task :rename do
   Dir.glob("_posts/*").each do |old_path|
     date = File.readlines(old_path).detect {|line| line.start_with?("date: ")}[6..15]
