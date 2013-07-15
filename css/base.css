@@ -40,6 +40,11 @@ a {
     color: black; }
     .sidebar .meta a:hover {
       color: #227ce8; }
+  .sidebar hr {
+    border: 0;
+    height: 6px;
+    background-image: url("/images/hr.png");
+    background-repeat: repeat-x; }
   .sidebar .sections {
     margin: 15px 0 0 0; }
     .sidebar .sections a {
