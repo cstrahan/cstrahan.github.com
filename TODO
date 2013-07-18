@@ -1,3 +1,6 @@
+Introduce continuations (and call/cc)
+Introduce Ragel
+Compare Jekyll, Middleman, Nanoc
 Vim inspired Ruby debugger frontend
 Ruby C-Ext & MRI internals
 Ruby FFI example

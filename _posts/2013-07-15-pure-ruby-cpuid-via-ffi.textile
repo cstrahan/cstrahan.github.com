@@ -12,7 +12,7 @@ In order to use the <code>cpuid</code> instruction from Ruby, we'll need to craf
 
 h2. Executable Memory Allocation
 
-Modern OSes "mark regions of writable memory as non-executable":http://en.wikipedia.org/wiki/Executable_space_protection to prevent various exploits. OSes set protection on a "page":https://en.wikipedia.org/wiki/Page_(computer_memory) by page basis, so we'll need to allocate memory such that it is:
+Modern operating systems "mark regions of writable memory as non-executable":http://en.wikipedia.org/wiki/Executable_space_protection to prevent various exploits. Memory is protected per "page":https://en.wikipedia.org/wiki/Page_(computer_memory), so we'll need to allocate the memory for our code such that it is:
 
 * aligned on a page boundary, and
 * the number of bytes is a multiple of the page size.
