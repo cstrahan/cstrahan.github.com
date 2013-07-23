@@ -6,6 +6,8 @@ comments: true
 title: How to Copy and Paste with Tmux on Mac OSX
 ---
 
+*UPDATE (2013/07/23):* What follows is only necessary prior to tmux version 1.8. If you're using tmux 1.8 or later, check out "Thoughtbot's notes on using <code>copy-pipe</code>":http://robots.thoughtbot.com/post/55885045171/tmux-copy-paste-on-os-x-a-better-future.
+
 h2. Step 1: Install reattach-to-user-namespace
 
 If you're using Homebrew:
