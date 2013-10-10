@@ -196,7 +196,7 @@ module CPUID
     end
 
     def self.allocate_executable(code)
-      pages = page_size * (code.size / page_size.to_f).ceil
+      pages = (code.size / page_size.to_f).ceil
       mem   = allocate_pages(pages)
       memset(mem, 0x90, pages * page_size)
       mem.put_array_of_uint8(0, code)
