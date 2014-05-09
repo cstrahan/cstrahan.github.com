@@ -4,6 +4,7 @@ uuid: f775c490cf460130f1813c07546db236
 date: 2013-07-15 02:37:38
 comments: true
 title: Getting CPUID info in pure Ruby
+publish: true
 ---
 
 Here's a fun little exercise: write a pure Ruby interface to the x86 "cpuid":http://en.wikipedia.org/wiki/CPUID instruction.

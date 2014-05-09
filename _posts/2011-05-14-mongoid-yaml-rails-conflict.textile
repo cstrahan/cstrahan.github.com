@@ -4,6 +4,7 @@ uuid: efd3392160b3012e8519001fe16c6eb2
 date: 2011-05-14 18:58:06
 comments: true
 title: Mongoid + YAML + Rails = Conflict
+publish: true
 ---
 
 h2. The Problem

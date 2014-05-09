@@ -4,6 +4,7 @@ uuid: 75fdf3b0c4d0012e53d1001bfc9c480a
 date: 2011-09-19 04:34:14
 comments: true
 title: No Sound from Headphones on Ubuntu
+publish: true
 ---
 
 On my Compaq Presario (Model: SR5152NX, Soundcard: ALC888), the audio wasn't working quite right; when I plugged my headphones in, the audio came out of both the speakers and the heaphones. Here's how I fixed it.

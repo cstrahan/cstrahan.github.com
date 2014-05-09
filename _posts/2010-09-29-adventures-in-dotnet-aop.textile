@@ -4,6 +4,7 @@ uuid: 949aa9b07087012e8523001fe16c6eb2
 date: 2010-09-29 22:20:54
 comments: true
 title: Adventures in .NET - Aspect Oriented Programming
+publish: true
 ---
 
 h2. About this Series

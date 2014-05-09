@@ -4,6 +4,7 @@ uuid: 33cb81b17080012e851c001fe16c6eb2
 date: 2010-04-26 21:28:05
 comments: true
 title: Linq in IronRuby
+publish: true
 ---
 
 Perusing through some old IronRuby mailing lists, I saw some people inquiring about using Linq from IronRuby. The general response was that it wasn't necessary - you can use the equivalent methods on the Enumerable module. That works fine if your working with an IEnumerable, but there's one big problem - you can't consume an API that exposes an IQueryable without calling #to_a. That sucks because you're now eager-loading everything into RAM. C# devs have the benefit of lambda expressions, but there isn't an equivelent in Ruby. You could create an Expression tree manually, but that sucks even harder.

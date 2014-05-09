@@ -1,3 +1,20 @@
+- understanding-call-cc
+  - explain continuations
+  - describe scheme-like CPS transform
+  - exceptions
+  - amb
+  - fibers
+  - binding_of_caller
+  - exception retry
+- metaprogramming-in-ruby
+- getting-started-with-nixos
+- ndepend-review
+- tools-of-the-trade
+- happybara-haskell-web-testing-framework
+- announcing-rupee
+
+-------
+
 Introduce continuations (and call/cc)
 Introduce Ragel
 Compare Jekyll, Middleman, Nanoc
@@ -19,11 +36,6 @@ The Ruby Object Model
 Metaprogramming - Ruby
 Metaprogramming - JavaScript
 Self, IO, Smalltalk, Scala, Rust, Ioke, Clojure, Ruby, Java (agents), CLJS, J, Factor, Haskell
-call/cc in laymen's terms
-Amb in Ruby (C?)
-Retry via call/cc
-binding_of_caller via call/cc
-Implementing Fibers with call/cc
 Kitchen Tour - Cooking with the Chef (run through of all chef features)
 IRSSI Configuration
 

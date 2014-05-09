@@ -4,6 +4,7 @@ uuid: 001003709de7012e53cf001bfc9c480a
 date: 2011-07-31 16:07:19
 comments: true
 title: The Ubuntu Experience
+publish: true
 ---
 
 !/images/2011-07-31-ubuntu-screenshot.png!

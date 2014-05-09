@@ -4,6 +4,7 @@ uuid: 566ff8f0707a012e851b001fe16c6eb2
 date: 2010-01-24 20:46:06
 comments: true
 title: Why Combinators? (pun intended)
+publish: true
 ---
 
 h2. Y indeed!

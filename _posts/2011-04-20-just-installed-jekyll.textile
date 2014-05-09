@@ -4,6 +4,7 @@ uuid: 8ec4b3304e1a012e850c001fe16c6eb2
 date: 2011-04-20 22:00:00
 title: From Wordpress to Jekyll
 comments: true
+publish: true
 ---
 
 I've finally decided to ditch "Wordpress":http://wordpress.org/ for "Jekyll":http://jekyllrb.com/. I _really_ don't see the point in using a full-fledged blogging platform if you're seasoned developer -- there's just _way_ too much bloat to sift through.

@@ -4,6 +4,7 @@ uuid: a787d8017081012e851d001fe16c6eb2
 date: 2009-06-03 21:38:29
 comments: true
 title: ODBC via Ruby on Windows
+publish: true
 ---
 
 I _just_ got Ruby to connect to a database via ODBC and the "dbi":https://rubygems.org/gems/dbi gem (particularly, MSSQL). I ran into a few problems along the way, so here are some of my notes.

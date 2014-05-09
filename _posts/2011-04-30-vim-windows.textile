@@ -4,6 +4,7 @@ uuid: 1e4ecae055d7012e8515001fe16c6eb2
 date: 2011-04-30 23:12:14
 comments: true
 title: Vim Tweaks on Windows
+publish: true
 ---
 
 To be frank, getting "vim":http://www.vim.org/ and Windows to play nice is a bit of a pain in the ass. Here are some tips and tricks to get the most out of vim on Windows.

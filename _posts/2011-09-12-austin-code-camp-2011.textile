@@ -4,6 +4,7 @@ uuid: 0ca7bb00bfed012e53d0001bfc9c480a
 date: 2011-09-12 23:16:16
 comments: true
 title: Austin Code Camp 2011
+publish: true
 ---
 
 It was a pleasure to both attend and speak at "Austin Code Camp":http://adnug.github.com/code-camp-2011/ this year. I couldn't _possibly_ have had a better response to my first talk, *"Seven Soft Skills for Super Sexy Salaries"*! If you attended my first talk, thank you so much for all of the positive feedback, and all of the great questions!

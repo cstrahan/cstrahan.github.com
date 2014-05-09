@@ -4,6 +4,7 @@ uuid: ea5e85907083012e8521001fe16c6eb2
 date: 2010-03-09 21:54:40
 comments: true
 title: ASP.NET Development Server v2.0 - Faster, Better, Stronger
+publish: true
 ---
 
 So here's the thing - we all hate having to tie our Visual Studio solutions to an IIS web site when the ASP.NET Development Server will do just fine.  Sure, it's best to test our web apps on a live, flesh and blood IIS server - but for small scale projects, why bother?  You and I are happy to use it 99% of the time...
