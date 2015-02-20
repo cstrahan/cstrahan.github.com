@@ -1,5 +1,7 @@
-_jekyll_s3.yml
-
-_drafts/
+_cache/
 _site/
-*.swp
+dist/
+
+site
+site.hi
+site.o
