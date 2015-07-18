@@ -1,4 +1,6 @@
 #!/bin/sh
 
-s3cmd sync _site/ s3://www.cstrahan.com \
-    --acl-public --delete-removed --guess-mime-type
+#s3cmd sync _site/ s3://www.cstrahan.com \
+#    --acl-public --delete-removed --guess-mime-type
+
+aws s3 sync _site s3://www.cstrahan.com --delete --acl public-read

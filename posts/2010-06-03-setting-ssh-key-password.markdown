@@ -1,6 +1,6 @@
 ---
-published: 2010-06-03 21:50:11
 title: Setting an SSH Key's Password
+description: 
 ---
 
 This was a royal pain in the ass to figure out, so hopefully this'll
@@ -13,8 +13,7 @@ without a hitch if you run them from the "GIT Bash". Otherwise, you'll
 need to ensure that openssl is on your PATH. I'm assuming here that your
 key is located at <code>%userprofile%/.ssh/id\_rsa</code>.
 
-Unencrypt your existing key
----------------------------
+# Unencrypt your existing key
 
 If your existing key is encrypted (read: has a password), you'll need to
 remove the encryption first (this will obviously overwrite the existing
@@ -24,8 +23,7 @@ key file):
 openssl rsa -in ~/.ssh/id_rsa -out ~/.ssh/id_rsa
 ```
 
-Encrypt your existing key
--------------------------
+# Encrypt your existing key
 
 Once you've unencrypted your key, you'll need to re-encrypt it (this
 will obviously overwrite the existing key file):

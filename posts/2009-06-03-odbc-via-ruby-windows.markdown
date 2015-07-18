@@ -1,14 +1,14 @@
 ---
-published: 2009-06-03 21:38:29
 title: ODBC via Ruby on Windows
+description: 
+tags: ruby
 ---
 
 I *just* got Ruby to connect to a database via ODBC and the
 [dbi](https://rubygems.org/gems/dbi) gem (particularly, MSSQL). I ran
 into a few problems along the way, so here are some of my notes.
 
-DBI
----
+# DBI
 
 Make sure you have the dbi and dbd-odbc gems installed:
 
@@ -37,8 +37,7 @@ DBI.connect('DBI:ODBC:test_dsn') do | dbh |
 end
 ```
 
-ActiveRecord
-------------
+# ActiveRecord
 
 You can also use <code>active\_record</code>. First, go grab
 <code>odbc-rails</code> from here:
@@ -76,8 +75,7 @@ gem. Here's a good link on that topic:
 
 <http://rubyrailsandwindows.blogspot.com/2008/03/rails-2-and-sql-server-2008-on-windows_24.html>
 
-Alternatives
-------------
+# Alternatives
 
 There are also a few other alternatives. Check these out:
 

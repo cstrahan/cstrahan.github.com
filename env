@@ -1,0 +1,12 @@
+#!/bin/sh
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+if [[ "$1" == "rebuild" ]]; then
+  printf "%s" "rebuilding: "
+  nix-instantiate ./shell.nix --indirect --add-root "$DIR/shell.drv"
+else
+  echo "entering nix-shell ..."
+  nix-shell "$(readlink -f $DIR/shell.drv)" --command zsh
+  echo "... exited nix-shell"
+fi

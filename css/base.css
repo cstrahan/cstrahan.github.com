@@ -1,0 +1,180 @@
+h1, h2, h3 {
+    margin: 0px 0px 18px 0px;
+    padding: 24px 0px 0px 0px;
+}
+
+p, ul {
+    margin: 18px 0px 18px 0px;
+}
+
+img {
+    margin: 12px 0px 12px 0px;
+    max-width: 100%;
+}
+
+ul {
+    padding-left: 18px;
+}
+
+div#footer {
+    margin: 60px 0px 36px 0px;
+}
+
+html {
+    background-color: #fff;
+    font-size: 16px;
+    font-family: sans-serif;
+    line-height: 24px;
+}
+
+body {
+    color: #333;
+}
+
+a {
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1px solid #555;
+}
+
+div.figure a{
+    border: none;
+}
+
+div.flickr img {
+    border: 1px solid #888;
+    padding: 6px;
+}
+
+div.flickr {
+    margin-top:    60px;
+    margin-bottom: 60px;
+}
+
+a img {
+    margin-bottom: 0px;
+}
+
+pre {
+    font-size: 14px;
+    margin-left: 18px;
+    overflow: auto;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+
+code {
+    background-color: #e6e6e6;
+    padding: 0px 4px 0px 4px;
+    margin: 0px 2px 0px 2px;
+    color: black;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+h2 {
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+ul {
+    list-style-image: url("../images/list-style-image.png");
+}
+
+blockquote {
+    background: #e6e6e6 url("../images/quote-background.png") no-repeat left top;
+    font-style: italic;
+    margin-left: 18px;
+    padding: 6px 6px 6px 54px;
+}
+
+.soft, .caption {
+    font-style: italic;
+    color: #555;
+}
+
+div.figure {
+    text-align: center;
+}
+
+div.figure p {
+    margin-top: 6px;
+}
+
+a.footnoteRef {
+    border: none;
+}
+
+a.footnoteRef sup:before {
+    content: "(";
+}
+
+a.footnoteRef sup:after {
+    content: ")";
+}
+
+a.footnoteRef sup {
+    padding: 2px;
+}
+
+div.footnotes {
+    color: #555;
+    border-left: 1px dashed #555;
+}
+
+div.footnotes hr {
+    display: none;
+}
+
+div#lightbox {
+    text-align: center;
+}
+
+div#lightbox img {
+    max-width:  100%;
+    max-height: 90%;
+    margin: 12px auto 12px auto;
+}
+
+div#lightbox a {
+    border: none;
+}
+
+div#lightbox div.pagination {
+    font-size: 14px;
+    color: #888;
+}
+
+div#lightbox div.pagination a {
+    color: #888;
+}
+
+div#footer {
+    font-size: 14px;
+}
+
+/*******************************************************************************
+ * Disqus                                                                      *
+ ******************************************************************************/
+
+/* Reset list image for disqus */
+div#disqus_thread ul {
+    list-style-image: none;
+}
+
+div#dsq-subscribe em {
+    text-decoration: none;
+}

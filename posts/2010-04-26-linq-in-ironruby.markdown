@@ -1,6 +1,7 @@
 ---
-published: 2010-04-26 21:28:05
 title: Linq in IronRuby
+description: 
+tags: ruby
 ---
 
 Perusing through some old IronRuby mailing lists, I saw some people
@@ -52,8 +53,7 @@ p nums.cast(Fixnum) \
       .to_a  #=> [2, 4, 6, 8]
 ```
 
-What's going on here?
----------------------
+# What's going on here?
 
 First off, I'm using the DynamicQueryable class that comes packaged as
 an example solution with Visual Studio 2008. I compiled the project as a

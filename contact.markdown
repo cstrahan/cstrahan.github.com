@@ -2,6 +2,8 @@
 title: Contact
 ---
 
+# Contact
+
 Feel free to contact me through the following means:
 
 <ul>
@@ -11,7 +13,7 @@ Feel free to contact me through the following means:
   <li><a href="http://www.linkedin.com/profile/view?id=31009847" target="_blank">linkedin</a></li>
 </ul>
 
-I also idle on the following Freenode channels:
+I also idle on the following <a href="https://freenode.net/">Freenode</a> channels:
 
 <ul>
   <li><a href="irc://irc.freenode.net/haskell">#haskell</a></li>

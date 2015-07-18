@@ -2,15 +2,29 @@
 title: Home
 ---
 
-<h2>Welcome</h2>
+<h1>About me</h1>
+<img src="/images/avatar.png" alt="That's me!"
+    style="float: right; margin: 18px; width: 256px; height: 256px;" />
+<p>
+    Hi! I'm Charles Strahan. I'm a software developer living in Washington, DC.
+</p>
+<p>
+    I contribute to a number of open source projects. 
+    I'm a commiter on the <a href="http://nixos.org">NixOS</a> Linux distribution.
+</p>
 
-<img src="/images/haskell-logo.png" style="float: right; margin: 10px;" />
-
-<p>Welcome to my blog!</p>
-
-<p>I've reproduced a list of recent posts here for your reading pleasure:</p>
-
-<h2>Posts</h2>
+<h1 style="clear: left">Recent b&lambda;ogposts</h1>
 $partial("templates/post-list.html")$
 
-<p>…or you can find more in the <a href="/archive.html">archives</a>.</p>
+<!--
+<a type="application/rss+xml" href="/rss.xml">
+    <img style="display: inline"
+        alt="rss feed" src="/images/rss.png" />
+    Feed
+  </a>
+&nbsp;
+-->
+<a href="/posts.html">All posts...</a>
+<p>
+    Browse: $tags$
+</p>

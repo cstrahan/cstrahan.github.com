@@ -1,6 +1,7 @@
 ---
-published: 2013-07-15 02:37:38
 title: Getting CPUID info in pure Ruby
+description: 
+tags: ruby, hack
 ---
 
 Here's a fun little exercise: write a pure Ruby interface to the x86
@@ -10,8 +11,7 @@ In order to use the `cpuid` instruction from Ruby, we'll need
 to craft and execute some machine code. Before we can do that, though,
 we'll need to properly allocate the memory for our code.
 
-Executable Memory Allocation
-----------------------------
+# Executable Memory Allocation
 
 Modern operating systems [mark regions of writable memory as
 non-executable](http://en.wikipedia.org/wiki/Executable_space_protection)
@@ -67,8 +67,7 @@ allocates one or more pages of memory, fills it with
 [NOPs](http://en.wikipedia.org/wiki/NOP), writes the machine code, and
 then sets the protection.
 
-CPUID machine code
-------------------
+# CPUID machine code
 
 Here's the fun part, where we assemble a
 [cdecl](http://en.wikipedia.org/wiki/X86_calling_conventions#cdecl)
@@ -122,7 +121,8 @@ an argument to `cpuid` (via `eax`) that specifies
 what info we want returned, and the later is where we write out the
 resulting data.
 
-All that's left now is to set up the trampoline and give it a spin:
+We'll now create a trampoline to call our machine code, giving back a
+ruby array containing `eax`, `ebx`, `ecx`, `edx`:
 
 ```ruby
 module CPUID
@@ -136,21 +136,31 @@ module CPUID
     buffer.get_array_of_uint32(0, 4)
   end
 end
-
-vendor_string = CPUID.run_cpuid(0).inject("") do |str, reg|
-  0.upto(3) do |idx|
-    str << ((reg >> (idx * 8)) & 0xFF).chr
-  end
-  str
-end
-
-puts vendor_string
-# On my MacBook, this prints:
-# GenuntelineI
 ```
 
-The Full Listing
-----------------
+To test this out, we can use `CPUID.run_cpuid(0)` to get the 12
+character vendor id, which is given back as `ebx`, `edx`, `ecx`:
+
+```ruby
+module CPUID
+  def self.vendor_id
+    str = ""
+    _, ebx, ecx, edx = run_cpuid(0)
+    [ebx, edx, ecx].each do |reg|
+      0.upto(3) do |idx|
+        str << ((reg >> (idx * 8)) & 0xFF).chr
+      end
+    end
+    str
+  end
+end
+
+# On my MacBook, this prints:
+# GenuineIntel
+puts CPUID.vendor_id
+```
+
+# The Full Listing
 
 ```ruby
 require 'ffi'
@@ -196,6 +206,17 @@ module CPUID
     buffer = FFI::MemoryPointer.new(:uint32, 4)
     CPUID_FUNCTION.call(fn, buffer)
     buffer.get_array_of_uint32(0, 4)
+  end
+
+  def self.vendor_id
+    str = ""
+    _, ebx, ecx, edx = run_cpuid(0)
+    [ebx, edx, ecx].each do |reg|
+      0.upto(3) do |idx|
+        str << ((reg >> (idx * 8)) & 0xFF).chr
+      end
+    end
+    str
   end
 
   module MemUtil extend FFI::Library

@@ -5,3 +5,5 @@ dist/
 site
 site.hi
 site.o
+
+*.drv

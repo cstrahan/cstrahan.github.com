@@ -1,6 +1,7 @@
 ---
-published: 2013-04-26 10:07:56
 title: How to Copy and Paste with Tmux on Mac OSX
+description: 
+tags: tmux
 ---
 
 **UPDATE (2013/07/23):** What follows is only necessary prior to tmux
@@ -8,8 +9,7 @@ version 1.8. If you're using tmux 1.8 or later, check out [Thoughtbot's
 notes on using
 `copy-pipe`](http://robots.thoughtbot.com/post/55885045171/tmux-copy-paste-on-os-x-a-better-future).
 
-Step 1: Install reattach-to-user-namespace
-------------------------------------------
+# Step 1: Install reattach-to-user-namespace
 
 If you're using Homebrew:
 
@@ -20,8 +20,7 @@ brew install reattach-to-user-namespace
 If not, go compile [the
 code](https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard) yourself.
 
-Step 2: Configure the Deafult Shell Command
--------------------------------------------
+# Step 2: Configure the Deafult Shell Command
 
 Open your Tmux config file (usually `~/.tmux.conf`) and add
 the\
@@ -35,8 +34,7 @@ Now, every time you open a new window or pane, Tmux will will attempt to
 use\
 `reattach-to-user-namespace` before starting your shell.
 
-Step 3: Configure Copy-Mode Bindings
-------------------------------------
+# Step 3: Configure Copy-Mode Bindings
 
 Assuming you're using the vi keybindings, add the following to your
 config:

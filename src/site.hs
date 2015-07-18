@@ -1,10 +1,11 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
+import           Control.Monad                   (liftM)
 import           Data.List                       (concat, intercalate)
 import           Data.Maybe
 import           Data.Monoid                     (mappend, (<>))
 import qualified Data.Set
-import           Hakyll
+import           System.Environment              (getArgs)
 import           System.IO.Unsafe                (unsafePerformIO)
 import           System.Process                  (readProcess)
 import           Text.Blaze.Html.Renderer.String (renderHtml)
@@ -18,75 +19,111 @@ import           Text.Pandoc                     (Block (..), Extension (Ext_mar
                                                   WriterOptions (..), bottomUp,
                                                   bottomUpM)
 
+import           Hakyll
+
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
+    -- Static files
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/*" $ do
+    -- Compress CSS
+    match ("css/*" .||. "css/**/*") $ do
         route   idRoute
         compile compressCssCompiler
 
-    match "css/**/*" $ do
-        route   idRoute
-        compile compressCssCompiler
-
+    -- Render some static pages
     match (fromList ["about.markdown", "contact.markdown"]) $ do
         route   $ setExtension "html"
         compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/content.html" defaultContext
             >>= loadAndApplyTemplate "templates/default.html" defaultContext
             >>= relativizeUrls
 
-    match "posts/*" $ do
-        --route $ setExtension "html"
-        route $ setExtension "html"
-        compile $ pandocCompilerWithTransform readerOptions writerOptions pandocTransform
-            >>= loadAndApplyTemplate "templates/post.html"    postCtx
-            >>= loadAndApplyTemplate "templates/default.html" postCtx
-            >>= relativizeUrls
+    -- Build tags
+    tags <- buildTags "posts/*" (fromCapture "tags/*.html")
 
-    create ["archive.html"] $ do
+    -- Render each and every post
+    match "posts/*" $ do
+        route   $ setExtension ".html"
+        compile $ do
+            pandocCompilerWithTransform readerOptions writerOptions pandocTransform
+                >>= saveSnapshot "content"
+                >>= return . fmap demoteHeaders
+                >>= loadAndApplyTemplate "templates/post.html" (postCtx tags)
+                >>= loadAndApplyTemplate "templates/content.html" defaultContext
+                >>= loadAndApplyTemplate "templates/default.html" defaultContext
+                >>= relativizeUrls
+
+    -- Post list
+    create ["posts.html"] $ do
         route idRoute
         compile $ do
             posts <- recentFirst =<< loadAll "posts/*"
-            let archiveCtx =
-                    listField "posts" postCtx (return posts) <>
+            let ctx =
+                    listField "posts" (postCtx tags) (return posts) <>
                     constField "title" "Archives"            <>
                     defaultContext
 
             makeItem ""
-                >>= loadAndApplyTemplate "templates/archive.html" archiveCtx
-                >>= loadAndApplyTemplate "templates/default.html" archiveCtx
+                >>= loadAndApplyTemplate "templates/posts.html" ctx
+                >>= loadAndApplyTemplate "templates/content.html" ctx
+                >>= loadAndApplyTemplate "templates/default.html" ctx
                 >>= relativizeUrls
 
+    -- Post tags
+    tagsRules tags $ \tag pattern -> do
+        let title = "Posts tagged " ++ tag
+
+        -- Copied from posts, need to refactor
+        route idRoute
+        compile $ do
+            posts <- recentFirst =<< loadAll pattern
+            let ctx = constField "title" title <>
+                        listField "posts" (postCtx tags) (return posts) <>
+                        defaultContext
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/posts.html" ctx
+                >>= loadAndApplyTemplate "templates/content.html" ctx
+                >>= loadAndApplyTemplate "templates/default.html" ctx
+                >>= relativizeUrls
 
     match "index.html" $ do
         route idRoute
         compile $ do
-            posts <- recentFirst =<< loadAll "posts/*"
-            let indexCtx =
-                    listField "posts" postCtx (return posts) <>
-                    constField "title" "Home"                <>
+            posts <- fmap (take 3) . recentFirst =<< loadAll "posts/*"
+            let indexContext =
+                    listField "posts" (postCtx tags) (return posts) <>
+                    field "tags" (\_ -> renderTagList tags) <>
                     defaultContext
 
             getResourceBody
-                >>= applyAsTemplate indexCtx
-                >>= loadAndApplyTemplate "templates/default.html" indexCtx
+                >>= applyAsTemplate indexContext
+                >>= loadAndApplyTemplate "templates/content.html" indexContext
+                >>= loadAndApplyTemplate "templates/default.html" indexContext
                 >>= relativizeUrls
 
+    -- Read templates
     match "templates/*" $ compile templateCompiler
 
+    -- Render the 404 page, we don't relativize URL's here.
+    match "404.html" $ do
+        route idRoute
+        compile $ pandocCompiler
+            >>= loadAndApplyTemplate "templates/content.html" defaultContext
+            >>= loadAndApplyTemplate "templates/default.html" defaultContext
+
 
 --------------------------------------------------------------------------------
-
---------------------------------------------------------------------------------
-postCtx :: Context String
-postCtx =
-    dateField "date" "%B %e, %Y" <>
-    --modificationTimeField "modified" "%d %b %Y" <>
-    defaultContext
+postCtx :: Tags -> Context String
+postCtx tags = mconcat
+    [ modificationTimeField "mtime" "%U"
+    , dateField "date" "%B %e, %Y"
+    , tagsField "tags" tags
+    , defaultContext
+    ]
 
 
 --------------------------------------------------------------------------------
@@ -95,9 +132,9 @@ readerOptions = defaultHakyllReaderOptions{ readerExtensions = Data.Set.filter (
 
 writerOptions :: WriterOptions
 writerOptions = defaultHakyllWriterOptions{ --writerStandalone = True,
-                                            --writerTemplate = "<div id=\"TOC\">$toc$</div>\n$body$",
+                                            --writerTemplate = "$if(toc)$\n$toc$\n$endif$\n$body$",
                                             --writerTableOfContents = True,
-                                            writerSectionDivs = True,
+                                            writerSectionDivs = False,
                                             writerColumns = 120,
                                             writerHtml5 = True,
                                             writerHTMLMathMethod = Text.Pandoc.MathML Nothing,
@@ -110,7 +147,6 @@ pandocTransform = bottomUp pygments
 
 pygments :: Block -> Block
 pygments block@(CodeBlock (_, _, namevals) contents) =
-  --let lang = (unsafePerformIO $ putStrLn (show block)) `seq` fromMaybe "text" $ lookup "lang" namevals
   let lang = languageFor block
       colored = pygmentize lang contents
       -- might consider using figure and figcaption
@@ -136,28 +172,9 @@ languageFor _                             = "text"
 
 
 --------------------------------------------------------------------------------
---datedRoute :: Routes
---datedRoute = customRoute $ \ident ->
---    case splitList '-' (toFilePath ident) of
---        year:month:day:titleParts ->
---            intercalate "/" $ year:month:day:(intercalate "-" titleParts):[]
---
---splitList :: Eq a => a -> [a] -> [[a]]
---splitList _   [] = []
---splitList sep list = h:splitList sep t
---        where (h,t)=split (==sep) list
---
----- | Split is like break, but the matching element is dropped.
---split :: (a -> Bool) -> [a] -> ([a], [a])
---split f s = (left,right)
---        where
---        (left,right')=break f s
---        right = if null right' then [] else tail right'
-
-
---------------------------------------------------------------------------------
 -- Inspiration:
 --   http://www.blaenkdenum.com/posts/the-switch-to-hakyll
 --   http://geekplace.eu/flow/posts/2014-09-24-draft-posts-with-hakyll.html
 --   http://vapaus.org/text/hakyll-configuration.html
 --   https://github.com/gwern/gwern.net/blob/master/hakyll.hs
+--   http://blog.scottlowe.org/
