@@ -1,3 +1,21 @@
+AppImage vs Flatpak vs Snaps
+
+-------
+
+- Meson/Pants/Bazel
+- JavaScript's undiscovered interfaces
+- One weird trick for wicked fast RPC
+- How containers work
+  - http://markmail.org/message/rtrn3fwww2samhzi#query:+page:1+mid:taygmqbdon67j343+state:results
+  - https://github.com/karelzak/util-linux/commit/c84f2590dfdb8570beeb731e0105f8fe597443d1
+  - https://github.com/karelzak/util-linux/commit/99fcafdf5f9c8cf7dedeeb1246210013da58dfd7
+  - Nixpkgs' buildFHSEnv
+- Becoming an expert developer
+- libprocess
+
+-- OLD STUFF --
+
+
 - understanding-call-cc
   - explain continuations
   - describe scheme-like CPS transform

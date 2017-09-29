@@ -1,6 +1,5 @@
 ---
 title: How to Copy and Paste with Tmux on Mac OSX
-description: 
 tags: tmux
 ---
 

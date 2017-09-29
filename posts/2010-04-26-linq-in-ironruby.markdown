@@ -1,6 +1,5 @@
 ---
 title: Linq in IronRuby
-description: 
 tags: ruby
 ---
 

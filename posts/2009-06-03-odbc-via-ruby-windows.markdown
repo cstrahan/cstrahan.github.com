@@ -1,6 +1,5 @@
 ---
 title: ODBC via Ruby on Windows
-description: 
 tags: ruby
 ---
 

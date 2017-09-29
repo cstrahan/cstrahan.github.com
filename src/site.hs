@@ -9,7 +9,7 @@ import           System.Environment              (getArgs)
 import           System.IO.Unsafe                (unsafePerformIO)
 import           System.Process                  (readProcess)
 import           Text.Blaze.Html.Renderer.String (renderHtml)
-import           Text.Blaze.Html5                as H
+import           Text.Blaze.Html5                as H hiding (main)
 import           Text.Blaze.XHtml5.Attributes    as A
 import           Text.Pandoc                     (Block (..), Extension (Ext_markdown_in_html_blocks),
                                                   HTMLMathMethod (MathML),

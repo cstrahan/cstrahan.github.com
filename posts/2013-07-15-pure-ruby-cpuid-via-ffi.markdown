@@ -1,6 +1,5 @@
 ---
 title: Getting CPUID info in pure Ruby
-description: 
 tags: ruby, hack
 ---
 

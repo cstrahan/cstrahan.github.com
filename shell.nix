@@ -1,7 +1,7 @@
 with (import <nixpkgs> { });
 
 let
-  ghc = haskellngPackages;
+  ghc = haskellPackages;
 
   ghcPackages = ghc.ghcWithPackages (p: with p; [
     ipprint

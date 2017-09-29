@@ -1,6 +1,5 @@
 ---
 title: Setting an SSH Key's Password
-description: 
 ---
 
 This was a royal pain in the ass to figure out, so hopefully this'll

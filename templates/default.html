@@ -30,7 +30,7 @@
             <h1>Links</h1>
             <a href="http://github.com/cstrahan">GitHub</a>
             <a href="http://twitter.com/charlesstrahan">Twitter</a>
-            <a href="http://www.linkedin.com/profile/view?id=31009847" target="_blank">linkedin</a>
+            <a href="http://www.linkedin.com/profile/view?id=31009847" target="_blank">LinkedIn</a>
         </div>
 
         $body$
@@ -44,7 +44,8 @@
             t.async = true;
             t.id    = 'gauges-tracker';
             t.setAttribute('data-site-id', '513a2d6e613f5d3c6f000186');
-            t.src = '//secure.gaug.es/track.js';
+            t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
+            t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
             var s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(t, s);
           })();
